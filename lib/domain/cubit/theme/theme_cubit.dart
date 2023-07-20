@@ -1,22 +1,23 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
 part 'theme_state.dart';
 
-// Values are stored and updated here
+/// [ThemeCubit] controls the Theme of whole app
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit() : super(ThemeLight(message: 'Light Theme'));
+  ThemeCubit() : super(ThemeLight());
 
   bool _isDark = false;
 
-  bool get isDark => _isDark;
+  ThemeMode get themeMode => _isDark ? ThemeMode.dark : ThemeMode.light;
 
+  /// Initiate this method to toggle theme
   void toggleTheme() {
     _isDark = !_isDark;
     if (_isDark) {
-      emit(ThemeDark(message: 'Dark Theme'));
+      emit(ThemeDark());
     } else {
-      emit(ThemeLight(message: 'Light Theme'));
+      emit(ThemeLight());
     }
   }
 }

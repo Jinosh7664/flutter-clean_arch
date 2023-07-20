@@ -1,6 +1,8 @@
 import 'package:clean_architecture/configs/app.dart';
 import 'package:clean_architecture/configs/apptheme.dart';
+import 'package:clean_architecture/domain/cubit/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -14,11 +16,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return MultiBlocProvider(
-    //   providers: const [],
-    //   child: const MainApp(),
-    // );
-    return const MainApp();
+    return MultiBlocProvider(providers: [
+      BlocProvider<ThemeCubit>(
+        create: (context) => ThemeCubit(),
+      )
+    ], child: const MainApp());
   }
 }
 
@@ -32,9 +34,10 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
+    ThemeCubit themeCubit = BlocProvider.of<ThemeCubit>(context, listen: true);
     return MaterialApp(
       navigatorKey: navigatorKey,
-      themeMode: ThemeMode.dark,
+      themeMode: themeCubit.themeMode,
       theme: AppTheme.lighttheme,
       darkTheme: AppTheme.darktheme,
       debugShowCheckedModeBanner: false,

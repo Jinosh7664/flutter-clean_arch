@@ -4,13 +4,9 @@ part of 'theme_cubit.dart';
 abstract class ThemeState {}
 
 class ThemeDark extends ThemeState {
-  final String message;
-
-  ThemeDark({required this.message});
+  ThemeDark();
 }
 
 class ThemeLight extends ThemeState {
-  final String message;
-
-  ThemeLight({required this.message});
+  ThemeLight();
 }
